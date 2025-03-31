@@ -43,4 +43,18 @@ display(tempDF)
 
 import org.apache.spark.sql.functions.expr
 
-display(customerDF.select(expr("address_id as address___id")))
+val tempDF = customerDF.select(expr("address_id as address___id"), expr("cast(customer_id as STRING) as customer_id_str"))
+
+display(tempDF)
+
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC using single quotes
+
+// COMMAND ----------
+
+val tempDF = customerDF.select($"demographics.buy_potential", $"demographics.credit_rating", 'customer_id, 'firstname, 'gender)
+
+display(tempDF)
