@@ -1,0 +1,30 @@
+#version: '3'
+
+services:
+  spark:
+    image: bitnami/spark:latest
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    volumes:
+      - ./code:/opt/spark-apps/code
+      - ./target:/opt/spark-apps/target
+      - ./data:/opt/spark-data
+      - ./output:/opt/spark-output
+
+  spark-worker:
+    image: bitnami/spark:latest
+    container_name: spark-worker
+    depends_on:
+      - spark
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+    volumes:
+      - ./code:/opt/spark-apps/code
+      - ./target:/opt/spark-apps/target
+      - ./data:/opt/spark-data
+      - ./output:/opt/spark-output
