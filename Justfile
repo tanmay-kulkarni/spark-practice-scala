@@ -10,7 +10,12 @@ default:
 # Compile the Scala code with SBT in a Docker container
 compile:
     @echo "Compiling Scala code..."
-    docker run --rm -v $(pwd):/project -w /project hseeberger/scala-sbt:11.0.13_1.6.2_2.12.15 sbt package
+    docker run --rm -v $(pwd):/project \
+      -v sbt-cache:/root/.sbt \
+      -v ivy-cache:/root/.ivy2 \
+      -v coursier-cache:/root/.cache/coursier \
+      -w /project \
+      hseeberger/scala-sbt:11.0.13_1.6.2_2.12.15 sbt package
     @echo "Compilation complete. JAR file created in target/scala-2.12/"
 
 # Start the Spark cluster using docker-compose
