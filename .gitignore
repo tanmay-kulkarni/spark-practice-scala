@@ -5,3 +5,18 @@ project
 notebooks.zip
 target
 data
+
+# Scala/SBT
+.bsp/
+.idea/
+.ensime_cache/
+.ensime_lucene/
+target/
+project/project/
+project/target/
+*.class
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
