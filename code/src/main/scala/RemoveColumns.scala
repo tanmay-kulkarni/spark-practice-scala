@@ -3,7 +3,7 @@ import org.apache.spark.sql.SparkSession
 
 object RemoveColumns {
     def main(args: Array[String]): Unit = {
-        val spark = SparkSession.builder().appName("Add New Columns").getOrCreate()
+        val spark = SparkSession.builder().appName("Remove Columns").getOrCreate()
         import spark.implicits._
         val df = spark.read.json("/opt/spark-data/customer.json")
         println("===No. of columns:===")
